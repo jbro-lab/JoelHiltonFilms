@@ -37,14 +37,17 @@ namespace JoelHiltonFilms.Controllers
         [HttpPost]//httppost response for NewMovie view
         public IActionResult NewMovie(Movie movie)
         {
+         
             if (movie.title.ToLower() != "independence day")
-            MovieDB.AddMovie(movie);
+            {
+                MovieDB.AddMovie(movie);
+            }
             return View("Confirmation", movie);
         }
 
-        public IActionResult Confirmation()
+        public IActionResult Confirmation(Movie movie)
         {
-            return View();
+            return View(movie);
         }
 
         public IActionResult AllMovies()
