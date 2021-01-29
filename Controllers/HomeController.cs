@@ -18,7 +18,7 @@ namespace JoelHiltonFilms.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index()//Home response for Index view
         {
             return View();
         }
@@ -26,6 +26,30 @@ namespace JoelHiltonFilms.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        [HttpGet]//httpget response for NewMovie view
+        public IActionResult NewMovie()
+        {
+            return View();
+        }
+
+        [HttpPost]//httppost response for NewMovie view
+        public IActionResult NewMovie(Movie movie)
+        {
+            if (movie.title.ToLower() != "independence day")
+            MovieDB.AddMovie(movie);
+            return View("Confirmation", movie);
+        }
+
+        public IActionResult Confirmation()
+        {
+            return View();
+        }
+
+        public IActionResult AllMovies()
+        {
+            return View(MovieDB.Movies);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
