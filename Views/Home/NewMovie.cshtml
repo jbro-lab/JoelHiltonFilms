@@ -2,8 +2,10 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+
 }
 @model JoelHiltonFilms.Models.Movie
+<!--form for entering new movies-->
 <form asp-action="NewMovie" method="post">
     <label for="category" asp-for="category">Category: </label>
     <select id="category" asp-for="category">
@@ -50,7 +52,9 @@
 
     <label for="notes" asp-for="notes">Notes: </label>
     <input type="text" rows="3" id="notes" asp-for="notes" /><br />
-    
 
-    <button type="submit">Submit</button>
+
+    <input type="submit" />
+    <!--puts out warnings if fields aren't entered-->
+    <div asp-validation-summary="All"></div>
 </form>

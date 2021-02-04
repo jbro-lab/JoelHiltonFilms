@@ -5,34 +5,41 @@
 }
 
 @model IEnumerable<JoelHiltonFilms.Models.Movie>
-<div>
-    <table>
-        <thead>
-            <tr>
-                <th>Category</th>
-                <th>Title</th>
-                <th>Year</th>
-                <th>Director</th>
-                <th>Rating</th>
-                <th>Edited</th>
-                <th>Lent To</th>
-                <th>Notes</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (JoelHiltonFilms.Models.Movie movie in Model)
-            {
-            <tr>
-                <td>@movie.category</td>
-                <td>@movie.title</td>
-                <td>@movie.year</td>
-                <td>@movie.director</td>
-                <td>@movie.rating</td>
-                <td>@movie.lentTo</td>
-                <td>@movie.notes</td>
-            </tr>
-            }
+    <!--Table-->
+    <div>
+        <table class="w3-table w3-striped w3-bordered">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Director</th>
+                    <th>Rating</th>
+                    <th>Edited</th>
+                    <th>Lent To</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--iterates through each movie and writes to HTML except Indepenndence Day-->
+                @foreach (JoelHiltonFilms.Models.Movie movie in Model)
+                {
+                    if (movie.title.ToLower() != "independence day")
+                    {
+                        <tr>
+                            <td>@movie.category</td>
+                            <td>@movie.title</td>
+                            <td>@movie.year</td>
+                            <td>@movie.director</td>
+                            <td>@movie.rating</td>
+                            <td>@movie.edited</td>
+                            <td>@movie.lentTo</td>
+                            <td>@movie.notes</td>
+                        </tr>
+                    }
+                }
 
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
+

@@ -37,22 +37,32 @@ namespace JoelHiltonFilms.Controllers
         [HttpPost]//httppost response for NewMovie view
         public IActionResult NewMovie(Movie movie)
         {
-         
-            if (movie.title.ToLower() != "independence day")
+            //checks model to make sure its valid
+            if (ModelState.IsValid)
             {
                 MovieDB.AddMovie(movie);
+                return RedirectToAction("Confirmation", movie);
             }
-            return View("Confirmation", movie);
+            
+            
+            return View();
         }
 
         public IActionResult Confirmation(Movie movie)
         {
+            
+            
             return View(movie);
         }
 
         public IActionResult AllMovies()
         {
             return View(MovieDB.Movies);
+        }
+
+        public IActionResult IndyDay()
+        {
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
