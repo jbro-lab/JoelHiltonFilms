@@ -12,10 +12,12 @@ namespace JoelHiltonFilms.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private MovieDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, MovieDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()//Home response for Index view
@@ -40,12 +42,47 @@ namespace JoelHiltonFilms.Controllers
             //checks model to make sure its valid
             if (ModelState.IsValid)
             {
-                MovieDB.AddMovie(movie);
+                _context.Add(movie);
+                _context.SaveChanges();
                 return RedirectToAction("Confirmation", movie);
             }
             
             
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int movieId)
+        {
+            return View(_context.Movies.Where(m => m.movieId == movieId).FirstOrDefault());
+        }
+       
+        [HttpPost]
+        public IActionResult Edit(Movie movie)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Movies.Update(movie);
+                _context.SaveChanges();
+                return RedirectToAction("AllMovies");
+            }
+            
+            return View();
+        }
+
+       public IActionResult Podcasts()
+        {
+            return View();
+        }
+       
+
+        public IActionResult Delete(int movieId)
+        {
+            Movie movie = _context.Movies.Where(m => m.movieId == movieId).FirstOrDefault();
+            _context.Movies.Remove(movie);
+            _context.SaveChanges();
+
+            return RedirectToAction("AllMovies");
         }
 
         public IActionResult Confirmation(Movie movie)
@@ -57,7 +94,8 @@ namespace JoelHiltonFilms.Controllers
 
         public IActionResult AllMovies()
         {
-            return View(MovieDB.Movies);
+            
+            return View(_context.Movies.Where(m => m.title.ToLower() != "independence day"));
         }
 
         public IActionResult IndyDay()

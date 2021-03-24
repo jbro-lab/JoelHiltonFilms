@@ -8,6 +8,9 @@ namespace JoelHiltonFilms.Models
 {
     public class Movie
     {//some fields required
+        [Key]
+        [Required]
+        public int movieId { get; set; }
         [Required(ErrorMessage = "Choose a category")]
         public string category { get; set; }
 
