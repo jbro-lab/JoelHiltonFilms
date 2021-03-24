@@ -36,12 +36,14 @@
                             <td>@movie.lentTo</td>
                             <td>@movie.notes</td>
                             <td>
+                                <!--returns MovieId when pushed so we can edit it-->
                                 <form asp-action="Edit" method="get" class="">
                                     <input type="hidden" name="movieId" value="@movie.movieId" />
                                     <button type="submit" name="edit" class="btn btn-outline-primary shadow">Edit</button>
                                 </form>
                             </td>
                             <td>
+                                <!--returns MovieId when pushed so we can delete it-->
                                 <form asp-action="Delete" method="post" class="">
                                     <input type="hidden" name="movieId" value="@movie.movieId" />
                                     <button type="submit" name="delete" class="btn btn-outline-primary shadow">Delete</button>

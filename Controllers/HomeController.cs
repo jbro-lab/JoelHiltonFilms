@@ -54,12 +54,14 @@ namespace JoelHiltonFilms.Controllers
         [HttpGet]
         public IActionResult Edit(int movieId)
         {
+            //for the HTtp Get request, couldn't figure how to do it with post
             return View(_context.Movies.Where(m => m.movieId == movieId).FirstOrDefault());
         }
        
         [HttpPost]
         public IActionResult Edit(Movie movie)
         {
+            //edits movie if model State is valid, if not just returns to Edit page
             if (ModelState.IsValid)
             {
                 _context.Movies.Update(movie);
@@ -71,13 +73,13 @@ namespace JoelHiltonFilms.Controllers
         }
 
        public IActionResult Podcasts()
-        {
+        {//for returning Podcasts page
             return View();
         }
        
 
         public IActionResult Delete(int movieId)
-        {
+        {//for deleting movies
             Movie movie = _context.Movies.Where(m => m.movieId == movieId).FirstOrDefault();
             _context.Movies.Remove(movie);
             _context.SaveChanges();
@@ -87,14 +89,14 @@ namespace JoelHiltonFilms.Controllers
 
         public IActionResult Confirmation(Movie movie)
         {
-            
+            //for confirming you have added a movie
             
             return View(movie);
         }
 
         public IActionResult AllMovies()
         {
-            
+            //returns all ovies except for independence day cuz it's trash
             return View(_context.Movies.Where(m => m.title.ToLower() != "independence day"));
         }
 

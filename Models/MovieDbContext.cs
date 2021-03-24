@@ -8,6 +8,7 @@ namespace JoelHiltonFilms.Models
 {
     public class MovieDbContext: DbContext
     {
+        //creates database
         public MovieDbContext(DbContextOptions<MovieDbContext> options):base (options)
         {
 

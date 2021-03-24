@@ -4,10 +4,12 @@
 @{
 }
 @model Movie
+<!--form for editing movies, should come pre-populated-->
 <form asp-action="Edit" method="post" class="w3-container w3-card-4 w3-light-grey">
     <input type="hidden" asp-for="movieId" value="@Model.movieId" />
     <label for="category" asp-for="category">Category: </label>
     <select id="category" asp-for="category" class="w3-input w3-border w3-round">
+        <!--Should have the previously selected one selected-->
         @if (Model.category == "Action/Adventure")
         {
             <option selected>Action/Adventure</option>
@@ -84,6 +86,7 @@
 
     <label for="rating" asp-for="rating">Rating: </label>
     <select id="rating" asp-for="rating" class="w3-input w3-border w3-round">
+        <!--Should have the previously selected one selected-->
         @if (Model.rating == "G")
         {
             <option selected value="G">G</option>

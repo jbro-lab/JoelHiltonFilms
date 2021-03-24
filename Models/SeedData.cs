@@ -12,6 +12,7 @@ namespace JoelHiltonFilms.Models
     {
         public static void EnsurePopulated(IApplicationBuilder application)
         {
+            //will ensure db is populated
             Console.WriteLine("Start EnsurePopulated.");
 
             MovieDbContext context = application.ApplicationServices.
@@ -49,11 +50,11 @@ namespace JoelHiltonFilms.Models
                 moviesToAdd.Add(movie1);
                 moviesToAdd.Add(movie2);
 
-                Console.WriteLine("Finished creating the tours.");
+                Console.WriteLine("Finished creating the Movies.");
 
                 context.Movies.AddRange(moviesToAdd);
 
-                Console.WriteLine("Finished adding the tour times to the DB.");
+                Console.WriteLine("Finished adding the Movies to the DB.");
 
                 context.SaveChanges();
 
